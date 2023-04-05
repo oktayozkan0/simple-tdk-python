@@ -11,7 +11,6 @@ class TDK:
     def __init__(self) -> None:
         self.response = None
         self.kelime = None
-        pass
 
     def _raw_search(self, kelime: str) -> dict:
         if not isinstance(kelime, str): raise TypeError("kelime must be a string.")
