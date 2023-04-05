@@ -14,15 +14,15 @@ class TDK:
 
     def _raw_search(self, kelime: str) -> dict:
         if not isinstance(kelime, str): raise TypeError("kelime must be a string.")
-        if self.response is None or self.response[0].get("madde") != kelime:
+        if self.response is None or self.response.get("madde") != kelime:
             r = requests.get(f"{self.SEARCH_URL}{kelime}", headers=self.HEADERS)
             self.kelime = kelime
-            self.response = r.json()
+            self.response = r.json()[0]
 
     def anlamlar(self, kelime: str) -> dict:
         self._raw_search(kelime)
-        return self.response[0].get("anlamlarListe")
+        return self.response.get("anlamlarListe")
 
     def atasozu(self, kelime: str):
         self._raw_search(kelime)
-        return self.response[0].get("atasozu")
+        return self.response.get("atasozu")
